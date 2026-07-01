@@ -1,0 +1,31 @@
+:root {
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --primary: #38bdf8;
+  --success: #4ade80;
+  --danger: #f87171;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --coin: #fbbf24;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+button {
+  cursor: pointer;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-primary { background: var(--primary); color: #0f172a; }
+.btn-success { background: var(--success); color: #0f172a; }
+.btn-danger { background: var(--danger); color: white; }
+.btn-secondary { background: #334155; color: var(--text); }
+.shop-btn { background: var(--coin); color: #000; }

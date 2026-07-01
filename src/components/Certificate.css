@@ -1,0 +1,11 @@
+.cert-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: flex; align-items: center; justify-content: center; z-index: 300;
+}
+.cert-card {
+  background: linear-gradient(135deg, #1e293b, #0f172a); border: 3px solid var(--coin);
+  padding: 40px; border-radius: 16px; max-width: 500px; width: 100%; text-align: center;
+}
+.cert-card h1 { color: var(--coin); margin-bottom: 8px; font-size: 1.6rem; }
+.cert-sub { color: var(--text-muted); margin-bottom: 24px; }
+.cert-name { font-size: 1.8rem; font-weight: bold; color: var(--primary); margin: 16px 0; }
+.cert-date { color: var(--text-muted); margin-top: 16px; font-size: 0.9rem; }
