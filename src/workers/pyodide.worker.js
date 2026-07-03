@@ -1,6 +1,19 @@
 let pyodideReady = false;
 let pyodide = null;
 
+// Pyodide's raw traceback includes its own internal interpreter frames
+// (_pyodide/_base.py etc). Keep just the part that actually describes the
+// student's code: from the last "<exec>" frame onward.
+function simplifyPythonError(message) {
+  if (!message) return message;
+  const marker = 'File "<exec>"';
+  const idx = message.lastIndexOf(marker);
+  if (idx === -1) return message;
+  let lineStart = message.lastIndexOf('\n', idx);
+  lineStart = lineStart === -1 ? 0 : lineStart + 1;
+  return message.slice(lineStart).trim();
+}
+
 async function loadPyodideAndPackages() {
   try {
     importScripts('https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js');
@@ -50,7 +63,7 @@ _codequest_reset()
       const output = pyodide.runPython('_stdout_buffer.getvalue()');
       postMessage({ type: 'output', output });
     } catch (error) {
-      postMessage({ type: 'error', error: error.message });
+      postMessage({ type: 'error', error: simplifyPythonError(error.message) });
     }
   }
 };

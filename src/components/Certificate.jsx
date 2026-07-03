@@ -10,7 +10,7 @@ export default function Certificate({ playerName, progress, totalXP, onClose }) 
         <h1>Certificate of Completion</h1>
         <p className="cert-sub">CodeQuest: Python & Data Structures and Algorithms</p>
         <p className="cert-name">{playerName}</p>
-        <p>has successfully completed {completedCount} levels and earned {totalXP} XP,</p>
+        <p>has successfully completed {completedCount} {completedCount === 1 ? 'level' : 'levels'} and earned {totalXP} XP,</p>
         <p>demonstrating mastery of Python fundamentals and 150 core DSA problems.</p>
         <p className="cert-date">{date}</p>
         <button className="btn-primary" onClick={onClose}>Close</button>

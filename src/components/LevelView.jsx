@@ -135,8 +135,12 @@ export default function LevelView({ levelId, onBack, onComplete, playSuccess, pl
     try {
       const results = await runCode(code, []);
       setTeachOutput(results.length > 0 ? results[0].output : 'Code executed successfully!');
+      if (!completed) {
+        completeLevel(level.id, 1, level.xpReward || 0);
+        unlockNextLevels(level.id, levels);
+        addCoins(5);
+      }
       setCompleted(true);
-      addCoins(5);
       playSuccess();
     } catch (err) {
       setTeachError(err.message);

@@ -49,7 +49,7 @@ export default function App() {
         <div className="player-stats">
           <span className="stat-badge">XP {totalXP}</span>
           <span className="stat-badge">Coins {progress.coins || 0}</span>
-          <span className="stat-badge">Lives {progress.lives || 5}</span>
+          <span className="stat-badge">Lives {progress.lives ?? 5}</span>
           <button className="shop-btn" onClick={() => setShowShop(!showShop)}>Shop</button>
         </div>
       </header>

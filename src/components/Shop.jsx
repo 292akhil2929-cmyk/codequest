@@ -3,18 +3,14 @@ import { spendCoins, addLives } from '../utils/gameState';
 import './Shop.css';
 
 export default function Shop({ progress, onClose, onUpdate }) {
-  const buyLife = () => {
-    if (spendCoins(20)) {
-      addLives(1);
+  const buyLife = (amount, cost) => {
+    if (spendCoins(cost)) {
+      addLives(amount);
       onUpdate();
-      alert('+1 life!');
+      alert(`+${amount} ${amount === 1 ? 'life' : 'lives'}!`);
     } else {
       alert('Not enough coins!');
     }
-  };
-
-  const buyHintPack = () => {
-    alert('Hint packs coming soon!');
   };
 
   return (
@@ -22,14 +18,15 @@ export default function Shop({ progress, onClose, onUpdate }) {
       <div className="shop-modal" onClick={e => e.stopPropagation()}>
         <h2>CodeQuest Shop</h2>
         <p>Coins: {progress.coins || 0}</p>
+        <p className="shop-note">Hints are always free during Practice - use them as often as you like.</p>
         <div className="shop-items">
           <div className="shop-item">
             <span>Extra Life</span>
-            <button className="btn-primary" onClick={buyLife}>Buy for 20 coins</button>
+            <button className="btn-primary" onClick={() => buyLife(1, 20)}>Buy for 20 coins</button>
           </div>
           <div className="shop-item">
-            <span>Hint Pack (3 hints)</span>
-            <button className="btn-primary" onClick={buyHintPack}>Buy for 30 coins</button>
+            <span>3 Lives Bundle</span>
+            <button className="btn-primary" onClick={() => buyLife(3, 50)}>Buy for 50 coins</button>
           </div>
         </div>
         <button className="btn-danger" onClick={onClose}>Close</button>
