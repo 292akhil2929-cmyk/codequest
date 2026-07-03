@@ -3,7 +3,8 @@ import WorldMap from './components/WorldMap';
 import LevelView from './components/LevelView';
 import Shop from './components/Shop';
 import Certificate from './components/Certificate';
-import { getProgress, initProgress, calculateTotalXP, getPlayerName, setPlayerName } from './utils/gameState';
+import { getProgress, initProgress, repairUnlocks, calculateTotalXP, getPlayerName, setPlayerName } from './utils/gameState';
+import { levels } from './utils/levels';
 import useSound from './hooks/useSound';
 import './App.css';
 
@@ -18,6 +19,7 @@ export default function App() {
 
   useEffect(() => {
     initProgress();
+    repairUnlocks(levels);
     refreshProgress();
   }, []);
 

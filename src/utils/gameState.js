@@ -50,6 +50,31 @@ export function unlockNextLevels(levelId, levels) {
   }
 }
 
+// Self-healing pass, run once on every app load: any level already marked
+// completed should always have its unlocks present in progress.unlocked.
+// This guarantees a player can never end up stuck with a finished level
+// whose next step never opened, regardless of what caused the gap (an old
+// cached build, an interrupted session, a future bug we haven't found yet).
+export function repairUnlocks(levels) {
+  const progress = getProgress();
+  const byId = {};
+  levels.forEach(l => { byId[l.id] = l; });
+  let changed = false;
+  Object.keys(progress.completed).forEach(id => {
+    const lvl = byId[id];
+    if (lvl && lvl.unlocks) {
+      lvl.unlocks.forEach(nextId => {
+        if (!progress.unlocked.includes(nextId)) {
+          progress.unlocked.push(nextId);
+          changed = true;
+        }
+      });
+    }
+  });
+  if (changed) saveProgress(progress);
+  return changed;
+}
+
 export function calculateTotalXP(progress) {
   return progress.xp;
 }
